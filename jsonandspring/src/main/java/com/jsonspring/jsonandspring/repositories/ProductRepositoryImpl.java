@@ -4,15 +4,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.context.annotation.RequestScope;
+import org.springframework.web.context.annotation.SessionScope;
 
 import com.jsonspring.jsonandspring.models.Product;
 
-// @RequestScope
-// @Primary
-@Repository // para que spring asocie el repo con la implementacion
+@SessionScope
+@Primary
+@Repository("productList") // para que spring asocie el repo con la implementacion
 public class ProductRepositoryImpl implements ProductRepository{
 
     private List<Product> products;

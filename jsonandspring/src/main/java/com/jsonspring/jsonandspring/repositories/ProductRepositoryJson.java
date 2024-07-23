@@ -21,7 +21,7 @@ public class ProductRepositoryJson implements ProductRepository{
 
         try {
             list = Arrays.asList(
-                objectMapper.readValue(resource.getFile(), Product[].class)
+                objectMapper.readValue(resource.getFile(), Product[].class) // lee la informacion del archivo del archivo, la lista que tiene adentro y las clases serializadas
             );
 
         } catch (StreamReadException e) {

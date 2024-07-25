@@ -1,4 +1,4 @@
-package com.jpataller.jpataller.entities;
+package com.jpaandspring.jpa.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

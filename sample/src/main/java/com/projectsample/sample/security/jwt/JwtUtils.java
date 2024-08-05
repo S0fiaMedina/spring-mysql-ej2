@@ -44,14 +44,16 @@ public class JwtUtils {
         System.out.println(getSignatureKey());
         try {
             // intenta parsear el token, si sale mal, se genera una excepcion
-            Jwts.parser()
+            Claims theToken = Jwts.parser()
                 .setSigningKey(getSignatureKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
+            
+            System.out.println("CLAIMS: " + theToken);
             return true;
         } catch (Exception e) {
-            System.out.println("Token invalido: " + e.getMessage() + token);
+            System.out.println("Token invalido: " + e.getMessage() + token + " ----> " + e.getLocalizedMessage());
             return false;
         }
     }

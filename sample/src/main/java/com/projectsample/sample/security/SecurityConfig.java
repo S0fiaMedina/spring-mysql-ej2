@@ -58,7 +58,7 @@ public class SecurityConfig {
             .sessionManagement( sesion -> sesion.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(http -> {
                 // publico
-                http.requestMatchers(HttpMethod.GET, "/ecommerce/welcome/login").permitAll(); /*.hasAnyRole("ADMIN", "USER")*/
+                http.requestMatchers(HttpMethod.POST, "/ecommerce/welcome/login").permitAll(); /*.hasAnyRole("ADMIN", "USER")*/
                 http.requestMatchers(HttpMethod.POST, "/ecommerce/welcome/create-user").permitAll();
                 // autenticado
                  

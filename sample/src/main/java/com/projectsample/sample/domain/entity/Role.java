@@ -16,7 +16,16 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @Table( name = "role")
 public class Role {
@@ -28,9 +37,10 @@ public class Role {
     private Long roleId;
 
     // basicamente el rol va a ser un enum tipo string 
-    @Enumerated(EnumType.STRING)
+    
     @Column(name = "name", nullable = false, unique = true)
-    private RoleEnum roleEnum;
+    @Enumerated(EnumType.STRING)
+    private RoleEnum name;
 
     // tabla intermedia de roles y permisos
     @ManyToMany
@@ -43,7 +53,7 @@ public class Role {
 
 
 
-   Audit audit = new Audit();
+   private final Audit audit = new Audit();
 
 
     @PrePersist
@@ -57,53 +67,5 @@ public class Role {
     }
 
 
-    public Long getRoleId() {
-        return roleId;
-    }
-
-
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
-    }
-
-
-    public RoleEnum getName() {
-        return roleEnum;
-    }
-
-
-    public void setName(RoleEnum roleEnum) {
-        this.roleEnum = roleEnum;
-    }
-
-
-    public Set<Permission> getPermissions() {
-        return permissions;
-    }
-
-
-    public void setPermissions(Set<Permission> permissions) {
-        this.permissions = permissions;
-    }
-
-
-    public Audit getAudit() {
-        return audit;
-    }
-
-
-    public void setAudit(Audit audit) {
-        this.audit = audit;
-    }
-
-
-    public RoleEnum getRoleEnum() {
-        return roleEnum;
-    }
-
-
-    public void setRoleEnum(RoleEnum roleEnum) {
-        this.roleEnum = roleEnum;
-    }
-
+   
 }

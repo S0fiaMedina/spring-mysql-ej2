@@ -34,6 +34,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException {
+        System.out.println("sssssssssssssssssssssssssssssssssssssssss");
         
         Account account = null;
         String email = "";
@@ -47,14 +48,15 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             // obtiene email y password de la entidad
             email = account.getEmail();
             password = account.getPassword();
+            System.out.println("Attempting authentication with email: " + email);
 
 
         } catch (StreamReadException e) {
-            e.printStackTrace();
+            System.out.println("Error en la lectura: " +  e.getCause());
         } catch (DatabindException e) {
-            e.printStackTrace();
+            System.out.println("Error en la databind: " +  e.getCause());
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error en IOException: " +  e.getCause());
         }
     
         // autenticacion

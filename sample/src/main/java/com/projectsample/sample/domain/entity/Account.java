@@ -17,9 +17,17 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 // tabla de usuarios en la base de datos
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @Table (name = "account")
 public class Account {
@@ -40,7 +48,7 @@ public class Account {
     private Boolean isActive;
 
     // roles de un usuario (basicamente se le dice a la base de datos que cargue de primero)
-    @ManyToMany( fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany( fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable(
         name = "account_role",
         joinColumns = @JoinColumn ( name = "account_id" ,referencedColumnName = "account_id"),
@@ -48,15 +56,10 @@ public class Account {
     )
     private Set<Role> roles;
 
-    
-
-
-    public Account() {
-    }
 
     // Audit -> COntiene el "created_at" y el "updated_at"
     @Embedded
-    Audit audit = new Audit();
+    private final Audit audit = new Audit();
 
     // llena el campo created_at cuando se crea el objeto de ACCOUNT (llama al metodo de audit)
     @PrePersist
@@ -69,56 +72,5 @@ public class Account {
     public void preUpdate() {
         audit.preUpdateAudit();
     }
-
-    public Long getAcccountId() {
-        return acccountId;
-    }
-
-    public void setAcccountId(Long acccountId) {
-        this.acccountId = acccountId;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Boolean getIsActive() {
-        return isActive;
-    }
-
-    public void setIsActive(Boolean isActive) {
-        this.isActive = isActive;
-    }
-
-    public Audit getAudit() {
-        return audit;
-    }
-
-    public void setAudit(Audit audit) {
-        this.audit = audit;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
-
-    
-
 
 }

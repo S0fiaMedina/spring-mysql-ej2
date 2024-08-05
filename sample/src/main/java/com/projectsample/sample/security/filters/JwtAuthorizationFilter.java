@@ -1,7 +1,6 @@
 package com.projectsample.sample.security.filters;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -35,15 +34,11 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         
         String tokenHeader = request.getHeader("Authorization");
-
-        System.out.println(tokenHeader);
+        
         if (tokenHeader != null && tokenHeader.startsWith("Bearer ")){
-
-            System.out.println("sssssssssssssss");
             
-
             String token = tokenHeader.substring(7);
-            System.out.println(jwtUtils.getEmailFromUser(token));
+            
 
             if (jwtUtils.isTokenValid(token)){
                 String email = jwtUtils.getEmailFromUser(token);
